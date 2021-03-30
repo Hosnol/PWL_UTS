@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use app\Models\Barang;
+use Database\Seeders\BarangSeeder;
 
 class BarangController extends Controller
 {
@@ -13,7 +15,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        //
+        $barang = Barang::all();
+        return view ('barang.index', compact('barang'));
     }
 
     /**
@@ -23,7 +26,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('barang.create');
     }
 
     /**
@@ -34,7 +37,17 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_barang' => 'required',
+            'kode_barang' => 'required',
+            'nama_barang' => 'required',
+            'kategori' => 'required',
+            'harga' => 'required',
+            'qty' => 'required',
+        ]);
+
+        Barang::created($request->all());
+        return redirect()->route('barang.index')->with('success','baranng berhasil ditambahkan');
     }
 
     /**
@@ -43,9 +56,10 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_barang)
     {
-        //
+        $barang = Barang::find($id_barang);
+        return view('barang.detail', compact('barang'));
     }
 
     /**
@@ -54,9 +68,10 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_barang)
     {
-        //
+        $barang = barang::find($id_barang);
+        return view ('barang.edit', compact('barang'));
     }
 
     /**
@@ -66,9 +81,19 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_barang)
     {
-        //
+        $request->validate([
+            'id_barang' => 'required',
+            'kode_barang' => 'required',
+            'nama_barang' => 'required',
+            'kategori' => 'required',
+            'harga' => 'required',
+            'qty' => 'required',
+        ]);
+
+        Barang::find($id_barang)->update($request->all());
+        return redirect()->route('barang.index')->with('success','baranng berhasil diupdate');
     }
 
     /**
@@ -77,8 +102,9 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_barang)
     {
-        //
+        Barang::find($id_barang)->delete();
+        return redirect()->route('barang.index')->with('success','baranng berhasil dihapus');
     }
 }
