@@ -45,8 +45,8 @@ class BarangController extends Controller
             'qty' => 'required',
         ]);
 
-        Barang::created($request->all());
-        return redirect()->route('barang.index')->with('success','barang berhasil ditambahkan');
+        Barang::create($request->all());
+        return redirect()->route('barang.index')->with('success','Barang berhasil ditambahkan');
     }
 
     /**
@@ -83,7 +83,6 @@ class BarangController extends Controller
     public function update(Request $request, $id_barang)
     {
         $request->validate([
-            'id_barang' => 'required',
             'kode_barang' => 'required',
             'nama_barang' => 'required',
             'kategori' => 'required',
@@ -92,7 +91,7 @@ class BarangController extends Controller
         ]);
 
         Barang::find($id_barang)->update($request->all());
-        return redirect()->route('barang.index')->with('success','barang berhasil diupdate');
+        return redirect()->route('barang.index')->with('success','Barang berhasil diupdate');
     }
 
     /**
@@ -104,7 +103,7 @@ class BarangController extends Controller
     public function destroy($id_barang)
     {
         Barang::find($id_barang)->delete();
-        return redirect()->route('barang.index')->with('success','barang berhasil dihapus');
+        return redirect()->route('barang.index')->with('success','Barang berhasil dihapus');
     }
 
     public function cari(Request $request){
@@ -114,7 +113,7 @@ class BarangController extends Controller
         $Barang = Barang::where('nama_barang','like','%'.$cari.'%')
         ->orwhere('kode_barang','like','%'.$cari.'%')
         ->orwhere('kategori','like','%'.$cari.'%')
-        ->get();
+        ->paginate();
 
         return view('barang.index',['barang'=>$Barang]);
     }
