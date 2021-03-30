@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\Barang;
+use App\Models\Barang;
 use Database\Seeders\BarangSeeder;
 
 class BarangController extends Controller
@@ -15,7 +15,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barang = Barang::all();
+        $barang = Barang::paginate(5);
         return view ('barang.index', compact('barang'));
     }
 
@@ -38,7 +38,6 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_barang' => 'required',
             'kode_barang' => 'required',
             'nama_barang' => 'required',
             'kategori' => 'required',
@@ -47,7 +46,7 @@ class BarangController extends Controller
         ]);
 
         Barang::created($request->all());
-        return redirect()->route('barang.index')->with('success','baranng berhasil ditambahkan');
+        return redirect()->route('barang.index')->with('success','barang berhasil ditambahkan');
     }
 
     /**
@@ -93,7 +92,7 @@ class BarangController extends Controller
         ]);
 
         Barang::find($id_barang)->update($request->all());
-        return redirect()->route('barang.index')->with('success','baranng berhasil diupdate');
+        return redirect()->route('barang.index')->with('success','barang berhasil diupdate');
     }
 
     /**
@@ -105,6 +104,18 @@ class BarangController extends Controller
     public function destroy($id_barang)
     {
         Barang::find($id_barang)->delete();
-        return redirect()->route('barang.index')->with('success','baranng berhasil dihapus');
+        return redirect()->route('barang.index')->with('success','barang berhasil dihapus');
+    }
+
+    public function cari(Request $request){
+        //melakukan validasi data
+        $cari=$request->cari;
+
+        $Barang = Barang::where('nama_barang','like','%'.$cari.'%')
+        ->orwhere('kode_barang','like','%'.$cari.'%')
+        ->orwhere('kategori','like','%'.$cari.'%')
+        ->get();
+
+        return view('barang.index',['barang'=>$Barang]);
     }
 }

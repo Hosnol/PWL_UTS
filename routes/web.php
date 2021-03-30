@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +15,5 @@ use App\Http\Controllers\BarangController;
 |
 */
 
-Route::resource('barang', BarangController::class);
+Route::resource('barang',BarangController::class);
+Route::get('/cari',[BarangController::class,'cari']);

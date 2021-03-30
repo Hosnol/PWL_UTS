@@ -56,4 +56,9 @@
             </tr>
         @endforeach
     </table>
+Halaman : {{ $barang->currentPage() }} <br/>
+Jumlah Data : {{ $barang->total() }} <br/>
+Data Per Halaman : {{ $barang->perPage() }} <br/>
+
+ <br>{{ $barang->links() }}
 @endsection
