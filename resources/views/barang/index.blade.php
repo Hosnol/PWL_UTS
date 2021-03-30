@@ -14,6 +14,7 @@
                 <form action="{{'/cari'}}" method="GET">
                     <input type="text" name="cari" placeholder="Cari barang .." value="{{ old('cari') }}">
                     <input type="submit" value="CARI">
+                </form>
             </div>
         </div>
     </div>
