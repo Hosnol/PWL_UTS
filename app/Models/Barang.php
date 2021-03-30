@@ -10,4 +10,6 @@ class Barang extends Model
     protected $table ='barang';
     public $timestamps = false;
     protected $primaryKey = 'id_barang';
+    protected $fillabel = ['kode_barang','nama_barang','kategori','harga','qty'];
+    protected $guarded = ['id_barang'];
 }
