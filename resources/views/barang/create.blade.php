@@ -32,7 +32,13 @@
                         </div>
                         <div class="form-group">
                             <label for="kategori">Kategori Barang</label>
-                            <br><input type="kategori" name="kategori" class="formcontrol" id="kategori" aria-describedby="kategori" >
+                            <br><select name="kategori">
+                                <option>--Kategori--</option>
+                                <option value="Makanan">Makanan</option>
+                                <option value="Minuman">Minuman</option>
+                                <option value="Snack">Snack</option>
+                                <option value="ATK">ATK</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="harga">Harga Barang</label>
@@ -43,6 +49,9 @@
                             <br><input type="qty" name="qty" class="formcontrol" id="qty" aria-describedby="qty" >
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="float-right">
+                            <a class="btn btn-success" href="{{ route('barang.index') }}">Kembali</a>
+                        </div>
                     </form>
                 </div>
             </div>
