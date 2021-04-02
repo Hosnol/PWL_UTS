@@ -24,12 +24,8 @@
                         @method('PUT')
                         <div class="form-group">
                             <div class="form-group">
-                                <label for="Id_barang">Id Barang</label>
-                                <br><input type="text" name="id_barang" readonly value={{ $barang->id_barang }} id="id_barang" aria-describedby="id_barang" >
-                            </div>
-                            <div class="form-group">
                                 <label for="kode_barang">Kode Barang</label>
-                                <br><input type="kode_barang" name="kode_barang" class="formcontrol" value={{ $barang->kode_barang }} id="kode_barang" aria-describedby="kode_barang" >
+                                <br><input type="text" name="kode_barang" class="formcontrol" value={{ $barang->kode_barang }} id="kode_barang" aria-describedby="kode_barang" >
                             </div>
                             <div class="form-group">
                                 <label for="nama_barang">Nama Barang</label>
