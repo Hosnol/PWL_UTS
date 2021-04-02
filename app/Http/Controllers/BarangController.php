@@ -113,7 +113,7 @@ class BarangController extends Controller
         $Barang = Barang::where('nama_barang','like','%'.$cari.'%')
         ->orwhere('kode_barang','like','%'.$cari.'%')
         ->orwhere('kategori','like','%'.$cari.'%')
-        ->paginate();
+        ->paginate(5);
 
         return view('barang.index',['barang'=>$Barang]);
     }
